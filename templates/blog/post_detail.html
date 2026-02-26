@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{post.title}} | Мой блог</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .post-title {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .post-meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .post-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        .post-views {
+            margin-top: 30px;
+            color: #999;
+            font-size: 0.9em;
+            text-align: right;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'post_list' %}" class="back-link">← Назад ко всем постам</a>
+
+        <h1 class="post-title">{{ post.title }}</h1>
+
+        <div class="post-meta">
+            
+            Опубликовано: {{post.created_date|date:"d.m.Y H:i"}}
+            {% if post.published_date %}
+                | Опубликовано: {{post.published_date|date:"d.m.Y H:i"}}
+            {% if post.updated_date %}
+                | Изменено: {{ post.updated_date|date:"d.m.Y H:i" }}
+            {% endif %}
+        </div>
+
+        <div class="post-content">
+            {{ post.content|linebreaks }}
+        </div>
+        
+        <div class="post-views">
+            👁️ Прочитано {{ post.views }} раз
+        </div>
+    </div>
+    </div>
+</body>
+</html>

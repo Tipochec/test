@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мой блог</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .post {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .post h2 {
+        margin-top: 0;
+        color: #333;
+      }
+      .post-date {
+        color: #666;
+        font-size: 0.9em;
+      }
+      .post-content {
+        margin-top: 15px;
+      }
+      .views {
+        color: #999;
+        font-size: 0.8em;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Мой блог</h1>
+
+      {% for post in posts %}
+      <div class="post">
+        <h2>
+          <a
+            href="{% url 'post_detail' slug=post.slug %}"
+            style="text-decoration: none; color: #333"
+            >{{post.title}}</a
+          >
+        </h2>
+        <div class="post-date">
+            Изменено: {{ post.updated_date|date:"d.m.Y H:i" }}
+            {% if post.updated_date %}
+                | Изменено: {{ post.updated_date|date:"d.m.Y H:i" }}
+            {% endif %}
+        </div>
+        <div class="post-content">
+          {{ post.content|linebreaks|truncatewords:50 }}
+        </div>
+        <a
+          href="{% url 'post_detail' slug=post.slug %}"
+          style="display: inline-block; margin-top: 10px; color: #007bff"
+        >
+          Читать далее →
+        </a>
+        <div class="views">👁️ Просмотров: {{ post.views }}</div>
+      </div>
+      {% empty %}
+      <p>Пока нет постов. Зайдите позже!</p>
+      {% endfor %}
+    </div>
+  </body>
+</html>
