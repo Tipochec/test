@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 
 def post_list(request):
-    posts = Post.objects.all().order_by('-created_date')
+    posts = Post.objects.all().order_by('-created_date', '-created_date')
 
     return render(request, 'blog/post_list.html', {'posts': posts})
 

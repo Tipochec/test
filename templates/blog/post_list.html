@@ -55,9 +55,13 @@
           >
         </h2>
         <div class="post-date">
-            Изменено: {{ post.updated_date|date:"d.m.Y H:i" }}
-            {% if post.updated_date %}
-                | Изменено: {{ post.updated_date|date:"d.m.Y H:i" }}
+          Опубликовано: {{ post.created_date|date:"d.m.Y H:i" }} 
+          
+            {% if post.updated_date|date:"U" != post.created_date|date:"U" %}
+                (обновлено: {{ post.updated_date|date:"d.m.Y H:i" }}) 
+            {% endif %}
+            {% if post.updated_date|date:"U" != post.created_date|date:"U" %}
+                (обновлено: {{ post.updated_date|date:"d.m.Y H:i" }})
             {% endif %}
         </div>
         <div class="post-content">
