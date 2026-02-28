@@ -55,10 +55,7 @@
           >
         </h2>
         <div class="post-date">
-            Изменено: {{ post.updated_date|date:"d.m.Y H:i" }}
-            {% if post.updated_date %}
-                | Изменено: {{ post.updated_date|date:"d.m.Y H:i" }}
-            {% endif %}
+          Опубликовано: {{ post.created_date|date:"d.m.Y H:i" }} 
         </div>
         <div class="post-content">
           {{ post.content|linebreaks|truncatewords:50 }}
